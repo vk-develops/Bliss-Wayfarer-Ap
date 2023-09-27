@@ -11,7 +11,7 @@ import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 
-const LoginIntroScreen = () => {
+const LoginIntroScreen = ({ navigation }) => {
     const windowWidth = Dimensions.get("window").width;
 
     return (
@@ -57,6 +57,9 @@ const LoginIntroScreen = () => {
                         <TouchableOpacity
                             activeOpacity={0.6}
                             style={{ width: "50%", height: "100%" }}
+                            // onPress={() => {
+                            //     navigation.navigate("RegisterScreen");
+                            // }}
                             onPress={() => {
                                 navigation.navigate("RegisterScreen");
                             }}

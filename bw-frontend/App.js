@@ -1,9 +1,13 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 import AuthStack from "./src/Screens/Auth/AuthStack";
 
 export default function App() {
+    SplashScreen.preventAutoHideAsync();
+    setTimeout(SplashScreen.hideAsync, 2000);
+
     const [loaded] = useFonts({
         PlexRegular: require("./assets/fonts/IBMPlexSans-Regular.ttf"),
         PlexMedium: require("./assets/fonts/IBMPlexSans-Medium.ttf"),
