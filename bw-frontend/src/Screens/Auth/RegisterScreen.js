@@ -1,4 +1,5 @@
 import {
+    Alert,
     Image,
     ImageBackground,
     ScrollView,
@@ -50,8 +51,59 @@ const RegisterScreen = ({ navigation }) => {
         }
     };
 
-    const handleSubmit = () => {
-        navigation.navigate("HomeStack");
+    const handleSubmit = async () => {
+        try {
+            const user = {
+                name,
+                email,
+                password,
+            };
+
+            const host = process.env.EXPO_PUBLIC_BACKEND_HOST;
+
+            const response = await fetch(`http://${host}:8081/api/users/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(user),
+            });
+
+            if (response.status === 201) {
+                Alert.alert(
+                    "Registration Success",
+                    "Yay!, your account has been registered successfully. You may now need to login in again to experience the best creation of the Aurora Phoenix.",
+                    [
+                        {
+                            text: "Ok",
+                            onPress: () => navigation.navigate("LoginScreen"),
+                        },
+                    ]
+                );
+            } else if (response.status === 400) {
+                Alert.alert(
+                    "Oops",
+                    "You're already a Bliss Wayfarer user please login to access your credentials",
+                    [
+                        {
+                            text: "Ok",
+                            onPress: () => navigation.navigate("LoginScreen"),
+                        },
+                    ]
+                );
+            } else {
+                Alert.alert(
+                    "Registration Error",
+                    "An unexpected error occurred. Please try again later."
+                );
+            }
+        } catch (err) {
+            console.log(err.message);
+            Alert.alert(
+                "Network Error",
+                "There was a problem connecting to the server. Please check your internet connection and try again."
+            );
+        }
     };
 
     return (
@@ -110,6 +162,8 @@ const RegisterScreen = ({ navigation }) => {
                                 placeholder="Enter your Name"
                                 value={name}
                                 onChangeText={(text) => setName(text)}
+                                autoCapitalize="none"
+                                autoCorrect={false}
                             />
                         </View>
                         <View>
@@ -122,6 +176,9 @@ const RegisterScreen = ({ navigation }) => {
                                 placeholder="Enter your Email id"
                                 value={email}
                                 onChangeText={(text) => setEmail(text)}
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                keyboardType="email-address"
                             />
                         </View>
                         <View>
@@ -136,6 +193,9 @@ const RegisterScreen = ({ navigation }) => {
                                 placeholder="Enter your Password"
                                 value={password}
                                 onChangeText={(text) => setPassword(text)}
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                secureTextEntry={true}
                             />
                         </View>
                     </View>

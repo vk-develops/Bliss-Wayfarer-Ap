@@ -101,6 +101,9 @@ const LoginScreen = ({ navigation }) => {
                                 placeholder="Enter your Email id"
                                 value={email}
                                 onChangeText={(text) => setEmail(text)}
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                keyboardType="email-address"
                             />
                         </View>
                         <View style={{ paddingTop: 20 }}>
@@ -115,6 +118,9 @@ const LoginScreen = ({ navigation }) => {
                                 placeholder="Enter your Password"
                                 value={password}
                                 onChangeText={(text) => setPassword(text)}
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                secureTextEntry={true}
                             />
                         </View>
                     </View>
