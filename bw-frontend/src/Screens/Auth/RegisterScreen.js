@@ -8,11 +8,52 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 
 const RegisterScreen = ({ navigation }) => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [nameError, setNameError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+
+    const validateForm = () => {
+        let valid = true;
+
+        if (name.trim() === "") {
+            setNameError("Name is required");
+            valid = false;
+        } else {
+            setNameError("");
+        }
+
+        if (email.trim() === "") {
+            setEmailError("Email is required");
+            valid = false;
+        } else {
+            setEmailError("");
+        }
+
+        if (password.trim() === "") {
+            setPasswordError("Password is required");
+            valid = false;
+        } else {
+            setPasswordError("");
+        }
+
+        if (valid === true) {
+            handleSubmit();
+        }
+    };
+
+    const handleSubmit = () => {
+        navigation.navigate("HomeStack");
+    };
+
     return (
         <ScrollView style={{ flex: 1, backgroundColor: "#5465FF" }}>
             <StatusBar
@@ -61,28 +102,47 @@ const RegisterScreen = ({ navigation }) => {
                     <View style={{ paddingTop: 35 }}>
                         <View>
                             <Text style={styles.heading}>Name</Text>
+                            {nameError ? (
+                                <Text style={styles.error}>{nameError}</Text>
+                            ) : null}
                             <TextInput
                                 style={styles.input}
                                 placeholder="Enter your Name"
+                                value={name}
+                                onChangeText={(text) => setName(text)}
                             />
                         </View>
                         <View>
                             <Text style={styles.heading}>Email</Text>
+                            {emailError ? (
+                                <Text style={styles.error}>{emailError}</Text>
+                            ) : null}
                             <TextInput
                                 style={styles.input}
                                 placeholder="Enter your Email id"
+                                value={email}
+                                onChangeText={(text) => setEmail(text)}
                             />
                         </View>
-                        <View style={{ paddingTop: 20 }}>
+                        <View>
                             <Text style={styles.heading}>Password</Text>
-
+                            {passwordError ? (
+                                <Text style={styles.error}>
+                                    {passwordError}
+                                </Text>
+                            ) : null}
                             <TextInput
                                 style={styles.input}
                                 placeholder="Enter your Password"
+                                value={password}
+                                onChangeText={(text) => setPassword(text)}
                             />
                         </View>
                     </View>
-                    <TouchableOpacity style={{ marginTop: 45 }}>
+                    <TouchableOpacity
+                        onPress={() => validateForm()}
+                        style={{ marginTop: 45 }}
+                    >
                         <LinearGradient
                             style={{
                                 borderRadius: 50,
@@ -170,11 +230,16 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         paddingLeft: 24,
         marginTop: 8,
+        marginBottom: 20,
     },
     ctaText: {
         fontSize: 18,
         fontFamily: "PlexMedium",
         padding: 15,
         color: "#fff",
+    },
+    error: {
+        color: "red",
+        paddingTop: 10,
     },
 });

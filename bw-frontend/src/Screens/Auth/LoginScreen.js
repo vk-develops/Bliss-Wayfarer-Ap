@@ -8,11 +8,43 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 
 const LoginScreen = ({ navigation }) => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+
+    const validateForm = () => {
+        let valid = true;
+
+        if (email.trim() === "") {
+            setEmailError("Email is required");
+            valid = false;
+        } else {
+            setEmailError("");
+        }
+
+        if (password.trim() === "") {
+            setPasswordError("Password is required");
+            valid = false;
+        } else {
+            setPasswordError("");
+        }
+
+        if (valid === true) {
+            handleSubmit();
+        }
+    };
+
+    const handleSubmit = () => {
+        navigation.navigate("HomeStack");
+    };
+
     return (
         <ScrollView style={{ flex: 1, backgroundColor: "#5465FF" }}>
             <StatusBar
@@ -55,27 +87,41 @@ const LoginScreen = ({ navigation }) => {
                         <Text style={styles.title}>Welcome Again!.</Text>
                         <Text style={styles.subtitle}>
                             Login to start your journey and to access your
-                            credentials{" "}
+                            credentials
                         </Text>
                     </View>
                     <View style={{ paddingTop: 35 }}>
                         <View>
                             <Text style={styles.heading}>Email</Text>
+                            {emailError ? (
+                                <Text style={styles.error}>{emailError}</Text>
+                            ) : null}
                             <TextInput
                                 style={styles.input}
                                 placeholder="Enter your Email id"
+                                value={email}
+                                onChangeText={(text) => setEmail(text)}
                             />
                         </View>
                         <View style={{ paddingTop: 20 }}>
                             <Text style={styles.heading}>Password</Text>
-
+                            {passwordError ? (
+                                <Text style={styles.error}>
+                                    {passwordError}
+                                </Text>
+                            ) : null}
                             <TextInput
                                 style={styles.input}
                                 placeholder="Enter your Password"
+                                value={password}
+                                onChangeText={(text) => setPassword(text)}
                             />
                         </View>
                     </View>
-                    <TouchableOpacity style={{ marginTop: 45 }}>
+                    <TouchableOpacity
+                        onPress={() => validateForm()}
+                        style={{ marginTop: 45 }}
+                    >
                         <LinearGradient
                             style={{
                                 borderRadius: 50,
@@ -169,5 +215,9 @@ const styles = StyleSheet.create({
         fontFamily: "PlexMedium",
         padding: 15,
         color: "#fff",
+    },
+    error: {
+        color: "red",
+        paddingTop: 10,
     },
 });
