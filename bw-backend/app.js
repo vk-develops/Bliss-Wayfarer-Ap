@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import chatRoute from "./routes/chatRoute.js";
 dotenv.config();
 
 //app inint
@@ -12,6 +13,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.status(200).json({ message: "Status ok" });
 });
+
+app.use("/", chatRoute);
 
 //app listen
 app.listen(PORT, () => {
