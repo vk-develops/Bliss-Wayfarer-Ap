@@ -1,4 +1,5 @@
 import {
+    Alert,
     Image,
     ImageBackground,
     ScrollView,
@@ -41,8 +42,36 @@ const LoginScreen = ({ navigation }) => {
         }
     };
 
-    const handleSubmit = () => {
-        navigation.navigate("HomeStack");
+    const handleSubmit = async () => {
+        try {
+            const user = {
+                email,
+                password,
+            };
+
+            const host = process.env.EXPO_PUBLIC_BACKEND_HOST;
+
+            const response = await fetch(
+                `http://${host}:8081/api/users/login`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(user),
+                }
+            );
+
+            // if(response.status === 200){
+
+            // }
+        } catch (err) {
+            console.log(err.message);
+            Alert.alert(
+                "Network Error",
+                "There was a problem connecting to the server. Please check your internet connection and try again."
+            );
+        }
     };
 
     return (

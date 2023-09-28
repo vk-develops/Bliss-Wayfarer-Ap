@@ -4,6 +4,8 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import AuthStack from "./src/Screens/Auth/AuthStack";
 
+import DrawerNavigator from "./src/Navigation/DrawerNavigator";
+
 export default function App() {
     SplashScreen.preventAutoHideAsync();
     setTimeout(SplashScreen.hideAsync, 2000);
@@ -22,7 +24,8 @@ export default function App() {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
             <NavigationContainer>
-                <AuthStack />
+                {/* <AuthStack /> */}
+                <DrawerNavigator />
             </NavigationContainer>
         </SafeAreaView>
     );
