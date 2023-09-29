@@ -168,7 +168,7 @@ const HomeScreen = ({ navigation }) => {
                     navigation.toggleDrawer();
                 }}
                 onPress2={() => {
-                    navigation.navigate("ProfileStack");
+                    navigation.navigate("ProfileTab");
                 }}
             />
         </ScrollView>

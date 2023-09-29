@@ -1,7 +1,7 @@
 import React from "react";
 import { Dimensions } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Feather } from "@expo/vector-icons";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 import TabNavigator from "./TabNavigator";
 import ItineraryStack from "../Screens/Itinerary/ItineraryStack";
 import CustomDrawer from "../Components/CustomDrawer";
@@ -40,7 +40,7 @@ const DrawerNavigator = () => {
                         );
                     },
                     headerShown: false,
-                    drawerLabel: "Hello ",
+                    drawerLabel: "Home",
                 }}
                 name="HomeDrawer"
                 component={TabNavigator}
@@ -49,14 +49,16 @@ const DrawerNavigator = () => {
                 options={{
                     drawerIcon: ({ color }) => {
                         return (
-                            <Feather
-                                name="users"
+                            <MaterialIcons
+                                name="format-list-numbered"
                                 size={24}
                                 color={color}
                                 style={{ marginLeft: 15 }}
                             />
                         );
                     },
+                    drawerLabel: "Generate Itinerary",
+                    headerShown: false,
                 }}
                 name="ItineraryStack"
                 component={ItineraryStack}

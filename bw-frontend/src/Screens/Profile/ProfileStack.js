@@ -24,6 +24,7 @@ const ProfileStack = ({ navigation }) => {
                     headerRight: () => {
                         return (
                             <TouchableOpacity
+                                style={{ paddingRight: 20 }}
                                 onPress={() => {
                                     navigation.toggleDrawer();
                                 }}

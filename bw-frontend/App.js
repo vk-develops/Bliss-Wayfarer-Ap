@@ -5,6 +5,7 @@ import * as SplashScreen from "expo-splash-screen";
 import AuthStack from "./src/Screens/Auth/AuthStack";
 import MainNavigator from "./src/Navigation/MainNavigator";
 import LoginProvider from "./src/LoginProvider";
+import ItineraryStack from "./src/Screens/Itinerary/ItineraryStack";
 
 // import DrawerNavigator from "./src/Navigation/DrawerNavigator";
 
@@ -30,6 +31,9 @@ export default function App() {
                     <MainNavigator />
                 </NavigationContainer>
             </LoginProvider>
+            {/* <NavigationContainer>
+                <ItineraryStack />
+            </NavigationContainer> */}
         </SafeAreaView>
     );
 }
