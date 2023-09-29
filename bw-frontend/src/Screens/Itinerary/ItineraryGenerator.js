@@ -8,7 +8,7 @@ import {
     Alert,
     ActivityIndicator,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import axios from "axios";
@@ -61,29 +61,14 @@ const ItineraryGenerator = ({ navigation }) => {
 
         if (valid === true) {
             handleSubmit();
-            console.log("OK Man");
         }
     };
 
     const handleSubmit = async () => {
         try {
             setLoading(true);
-            // const userInputs = {
-            //     destination,
-            //     budget,
-            //     noOfDays,
-            //     cuisine,
-            // };
 
             const host = process.env.EXPO_PUBLIC_BACKEND_HOST;
-
-            // const response = await fetch(`http://${host}:8081/chat`, {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify(userInputs),
-            // });
 
             const response = await axios.post(`http://${host}:8081/chat`, {
                 destination,
@@ -93,21 +78,23 @@ const ItineraryGenerator = ({ navigation }) => {
             });
 
             const data = response.data;
-            console.log(data);
-            console.log(typeof data);
             setResponseData(data);
-            setLoading(false);
-            console.log(responseData);
-            console.log(typeof responseData);
-            navigation.navigate("ItineraryList", { Ititdata: responseData });
         } catch (err) {
             console.error(err);
             Alert.alert(
                 "Network Error",
                 "There was a problem connecting to the server. Please check your internet connection and try again."
             );
+        } finally {
+            setLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (responseData) {
+            navigation.navigate("ItineraryList", { Ititdata: responseData });
+        }
+    }, [responseData, navigation]);
 
     return (
         <ScrollView style={{ backgroundColor: "#fff", padding: 20 }}>
