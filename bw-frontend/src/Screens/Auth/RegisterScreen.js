@@ -93,7 +93,7 @@ const RegisterScreen = ({ navigation }) => {
                 );
             } else {
                 Alert.alert(
-                    "Registration Error",
+                    "Login Failed",
                     "An unexpected error occurred. Please try again later."
                 );
             }

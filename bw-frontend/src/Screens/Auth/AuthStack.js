@@ -6,7 +6,6 @@ import {
 import LoginIntroScreen from "./LoginIntroScreen";
 import LoginScreen from "./LoginScreen";
 import RegisterScreen from "./RegisterScreen";
-import HomeStack from "../Home/HomeStack";
 
 const Stack = createStackNavigator();
 
@@ -31,10 +30,6 @@ const AuthStack = () => {
             <Stack.Screen
                 name="RegisterScreen"
                 component={RegisterScreen}
-            />
-            <Stack.Screen
-                name="HomeStack"
-                component={HomeStack}
             />
         </Stack.Navigator>
     );

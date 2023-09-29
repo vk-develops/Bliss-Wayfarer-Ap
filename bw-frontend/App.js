@@ -3,8 +3,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import AuthStack from "./src/Screens/Auth/AuthStack";
+import MainNavigator from "./src/Navigation/MainNavigator";
+import LoginProvider from "./src/LoginProvider";
 
-import DrawerNavigator from "./src/Navigation/DrawerNavigator";
+// import DrawerNavigator from "./src/Navigation/DrawerNavigator";
 
 export default function App() {
     SplashScreen.preventAutoHideAsync();
@@ -23,10 +25,11 @@ export default function App() {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-            <NavigationContainer>
-                {/* <AuthStack /> */}
-                <DrawerNavigator />
-            </NavigationContainer>
+            <LoginProvider>
+                <NavigationContainer>
+                    <MainNavigator />
+                </NavigationContainer>
+            </LoginProvider>
         </SafeAreaView>
     );
 }

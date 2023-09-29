@@ -39,6 +39,8 @@ const DrawerNavigator = () => {
                             />
                         );
                     },
+                    headerShown: false,
+                    drawerLabel: "Hello ",
                 }}
                 name="HomeDrawer"
                 component={TabNavigator}

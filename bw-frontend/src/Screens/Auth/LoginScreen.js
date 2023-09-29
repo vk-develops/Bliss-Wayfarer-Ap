@@ -12,8 +12,11 @@ import {
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
+import { useLogin } from "../../LoginProvider";
 
 const LoginScreen = ({ navigation }) => {
+    const { setIsLoggedIn, setProfile } = useLogin();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -62,9 +65,32 @@ const LoginScreen = ({ navigation }) => {
                 }
             );
 
-            // if(response.status === 200){
+            const responseData = await response.json();
 
-            // }
+            if (response.status === 200 && responseData.success) {
+                // Successful login
+                setProfile(responseData.user);
+                setIsLoggedIn(true);
+            } else if (response.status === 400) {
+                // Invalid email
+                Alert.alert(
+                    "Login Failed",
+                    "The email does not exist. Please create an account before logging in."
+                );
+            } else if (response.status === 401) {
+                // Invalid password
+                Alert.alert(
+                    "Login Failed",
+                    "You have entered the wrong password. Please enter the correct one to get logged in."
+                );
+            } else {
+                // Handle other unexpected errors
+                console.error("Login Error:", responseData);
+                Alert.alert(
+                    "Login Error",
+                    "An unexpected error occurred. Please try again later."
+                );
+            }
         } catch (err) {
             console.log(err.message);
             Alert.alert(

@@ -43,6 +43,7 @@ const LoginIntroScreen = ({ navigation }) => {
                         flex: 0.1,
                         width: "100%",
                         paddingTop: 50,
+                        marginBottom: 45,
                     }}
                 >
                     <View

@@ -1,14 +1,17 @@
 import { ImageBackground, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
-import Pattern from "../../assets/PatternBackground-1.png";
+import Pattern from "../../assets/PatternBackground-2.png";
 import {
     DrawerItemList,
     DrawerContentScrollView,
     DrawerItem,
 } from "@react-navigation/drawer";
 import { Ionicons, Feather } from "@expo/vector-icons";
+import { useLogin } from "../LoginProvider";
 
 const CustomDrawer = (props) => {
+    const { setIsLoggedIn, profile } = useLogin();
+
     return (
         <View style={{ flex: 1 }}>
             <View
@@ -62,7 +65,7 @@ const CustomDrawer = (props) => {
                                     paddingTop: 10,
                                 }}
                             >
-                                Mightier
+                                {profile.name}
                             </Text>
                             <View
                                 style={{

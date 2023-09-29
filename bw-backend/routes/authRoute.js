@@ -54,10 +54,31 @@ router.post("/login", async (req, res) => {
             { userId: user._id },
             process.env.JWT_SECRET_KEY,
             {
-                expiresIn: "1h", // Token expires in 1 hour (adjust as needed)
+                expiresIn: "1d",
             }
         );
-        res.json({ token });
+
+        let oldTokens = user.tokens || [];
+
+        if (oldTokens.length) {
+            oldTokens = oldTokens.filter((t) => {
+                const timeDiff = (Date.now() - parseInt(t.signedAt)) / 1000;
+                if (timeDiff < 86400) {
+                    return t;
+                }
+            });
+        }
+
+        await User.findByIdAndUpdate(user._id, {
+            tokens: [...oldTokens, { token, signedAt: Date.now().toString() }],
+        });
+
+        const userInfo = {
+            name: user.name,
+            email: user.email,
+        };
+
+        res.json({ success: true, user: userInfo, token });
     } catch (err) {
         res.status(500).json({ err: err.message });
     }
