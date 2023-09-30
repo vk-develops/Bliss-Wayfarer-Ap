@@ -187,7 +187,7 @@ const ItineraryGenerator = ({ navigation }) => {
             >
                 <Text>ItineraryList</Text>
             </TouchableOpacity>
-            {loading ? <ActivityIndicator /> : null}
+            {loading ? <ActivityIndicator size="large" /> : null}
             {/* {responseData ? <ItineraryList data={responseData} /> : null} */}
         </ScrollView>
     );
