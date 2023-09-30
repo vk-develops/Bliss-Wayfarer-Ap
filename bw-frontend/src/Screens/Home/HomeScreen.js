@@ -158,7 +158,7 @@ const Header = (props) => {
 
 const HomeScreen = ({ navigation }) => {
     return (
-        <ScrollView>
+        <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
             <StatusBar
                 backgroundColor="#5465ff"
                 style="light"
@@ -171,10 +171,59 @@ const HomeScreen = ({ navigation }) => {
                     navigation.navigate("ProfileTab");
                 }}
             />
+            <View style={{ padding: 20 }}>
+                <Text style={styles.title}>
+                    Want to generate a Personalized travel Itinerary?
+                </Text>
+                <Text style={styles.subTitle}>
+                    Then Bliss Wayfarer's top feature known as the AI Travel
+                    Itinerary generator is the best solution for you to have an
+                    unforgetable travel experience.
+                </Text>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("ItineraryHomeStack")}
+                    style={{ marginTop: 30, marginBottom: 55 }}
+                >
+                    <LinearGradient
+                        style={{
+                            borderRadius: 50,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 0 }}
+                        colors={["#9BB1FF", "#5465FF"]}
+                    >
+                        <Text style={styles.ctaText}>
+                            Try Itinerary Generator
+                        </Text>
+                    </LinearGradient>
+                </TouchableOpacity>
+            </View>
         </ScrollView>
     );
 };
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    title: {
+        fontFamily: "PlexSemiBold",
+        fontSize: 25,
+        color: "#3B2776",
+        paddingTop: 5,
+    },
+    subTitle: {
+        fontFamily: "PlexRegular",
+        fontSize: 14,
+        color: "#555",
+        paddingTop: 15,
+    },
+    ctaText: {
+        fontSize: 18,
+        fontFamily: "PlexMedium",
+        padding: 15,
+        color: "#fff",
+    },
+});

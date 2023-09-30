@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     Alert,
     ActivityIndicator,
+    Image,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
@@ -98,6 +99,9 @@ const ItineraryGenerator = ({ navigation }) => {
 
     return (
         <ScrollView style={{ backgroundColor: "#fff", padding: 20 }}>
+            <View>
+                <Image source={require("../../../assets/Itinerary.jpg")} />
+            </View>
             <View>
                 <Text style={styles.title}>Travel Itinerary Generator</Text>
                 <Text style={styles.subTitle}>

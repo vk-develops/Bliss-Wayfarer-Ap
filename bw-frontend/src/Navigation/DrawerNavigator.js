@@ -5,6 +5,7 @@ import { Feather, MaterialIcons } from "@expo/vector-icons";
 import TabNavigator from "./TabNavigator";
 import ItineraryStack from "../Screens/Itinerary/ItineraryStack";
 import CustomDrawer from "../Components/CustomDrawer";
+// import AITravelPlanner from "../Screens/Dummy/Dummy";
 
 const Drawer = createDrawerNavigator();
 
@@ -63,6 +64,10 @@ const DrawerNavigator = () => {
                 name="ItineraryStack"
                 component={ItineraryStack}
             />
+            {/* <Drawer.Screen
+                name="DummyScreen"
+                component={AITravelPlanner}
+            /> */}
         </Drawer.Navigator>
     );
 };
