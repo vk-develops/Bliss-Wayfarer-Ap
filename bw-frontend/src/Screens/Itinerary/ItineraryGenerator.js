@@ -99,9 +99,9 @@ const ItineraryGenerator = ({ navigation }) => {
 
     return (
         <ScrollView style={{ backgroundColor: "#fff", padding: 20 }}>
-            <View>
+            {/* <View>
                 <Image source={require("../../../assets/Itinerary.jpg")} />
-            </View>
+            </View> */}
             <View>
                 <Text style={styles.title}>Travel Itinerary Generator</Text>
                 <Text style={styles.subTitle}>
@@ -186,11 +186,11 @@ const ItineraryGenerator = ({ navigation }) => {
                     <Text style={styles.ctaText}>Generate Itinerary</Text>
                 </LinearGradient>
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
                 onPress={() => navigation.navigate("ItineraryList")}
             >
                 <Text>ItineraryList</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             {loading ? <ActivityIndicator size="large" /> : null}
             {/* {responseData ? <ItineraryList data={responseData} /> : null} */}
         </ScrollView>
